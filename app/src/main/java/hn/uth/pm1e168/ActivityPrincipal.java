@@ -8,7 +8,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,8 +36,10 @@ import hn.uth.pm1e168.configuracion.Transacciones;
 
 public class ActivityPrincipal extends AppCompatActivity {
 
-    EditText nombre, telefono, nota;
+    EditText nombre, telefono, nota, pais;
+    private EditText num1EditText, num2EditText, num3EditText;
     Button btnSave;
+    Button btnAd;
 
     static final int peticion_acceso_camara = 101;
     static final int peticion_toma_fotografica = 102;
@@ -49,6 +53,17 @@ public class ActivityPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        btnAd = (Button) findViewById(R.id.btnAd);
+
+        num1EditText = findViewById(R.id.txtnombre);
+        num2EditText = findViewById(R.id.txtTelefono);
+        num3EditText = findViewById(R.id.txtnota);
+
+        nombre = (EditText) findViewById(R.id.txtnombre);
+        telefono = (EditText)findViewById(R.id.txtTelefono);
+        nota = (EditText)findViewById(R.id.txtnota);
+        //pais = (EditText)findViewById(R.id.spinner);
+
         Button btnContactos = findViewById(R.id.btnContactos);
         btnContactos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +76,7 @@ public class ActivityPrincipal extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.spinner);
 
         // Datos para llenar el Spinner
-        String[] datos = {"Honduras", "Costa Rica", "Guatemala", "El Salvador"};
+        String[] datos = {"Pais","Honduras", "Costa Rica", "Guatemala", "El Salvador"};
 
         // Crear un adaptador
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos);
@@ -74,6 +89,7 @@ public class ActivityPrincipal extends AppCompatActivity {
         int defaultValueIndex = 0; // El índice de la opción que deseas establecer como predeterminada
         spinner.setSelection(defaultValueIndex);
 
+
         imageView = (ImageView)findViewById(R.id.imageView);
         btntakefoto = (Button) findViewById(R.id.btntakefoto);
 
@@ -84,6 +100,7 @@ public class ActivityPrincipal extends AppCompatActivity {
             }
         });
 
+        //pais = (Spinner) findViewById(R.id.spinner);
         nombre = (EditText) findViewById(R.id.txtnombre);
         telefono = (EditText)findViewById(R.id.txtTelefono);
         nota = (EditText)findViewById(R.id.txtnota);
@@ -93,32 +110,51 @@ public class ActivityPrincipal extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddPerson();
+                if (num1EditText.getText().toString().isEmpty()) {
+                    mostrarAlertDialog("Campo Nombre está vacío");
+                } else if (num2EditText.getText().toString().isEmpty()) {
+                    mostrarAlertDialog("Campo Teléfono está vacío");
+                } else if ( num3EditText.getText().toString().isEmpty()) {
+                    mostrarAlertDialog("Campo Nota está vacío");
+                } else {
+                AddPerson();}
+            }
+        });
+
+        btnAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ActivityPais.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void AddPerson()
-    {
-        try {
-            SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.namedb, null,1);
-            SQLiteDatabase db =  conexion.getWritableDatabase();
+    private void AddPerson() {
+            try {
+                SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.namedb, null, 1);
+                SQLiteDatabase db = conexion.getWritableDatabase();
 
-            ContentValues valores = new ContentValues();
-            valores.put(Transacciones.nombres, nombre.getText().toString());
-            valores.put(Transacciones.telefono, telefono.getText().toString());
-            valores.put(Transacciones.nota, nota.getText().toString());
+                ContentValues valores = new ContentValues();
+                //valores.put(Transacciones.pais, pais.getText().toString());
+                valores.put(Transacciones.nombre, nombre.getText().toString());
+                valores.put(Transacciones.telefono, telefono.getText().toString());
+                valores.put(Transacciones.nota, nota.getText().toString());
 
-            Long Result = db.insert(Transacciones.Tabla, Transacciones.id, valores);
+                Long Result = db.insert(Transacciones.Tabla, Transacciones.id, valores);
 
-            Toast.makeText(this, getString(R.string.Respuesta), Toast.LENGTH_SHORT).show();
-            db.close();
-        }
-        catch (Exception exception)
-        {
-            Toast.makeText(this, getString(R.string.ErrorResp), Toast.LENGTH_SHORT).show();
-        }
+                String resultado = String.valueOf(telefono);
 
+                // Enviar el resultado a la segunda actividad
+                Intent intent = new Intent(ActivityPrincipal.this, ActivityCall.class);
+                intent.putExtra("resultado", resultado);
+                startActivity(intent);
+
+                Toast.makeText(this, getString(R.string.Respuesta), Toast.LENGTH_SHORT).show();
+                db.close();
+            } catch (Exception exception) {
+                Toast.makeText(this, getString(R.string.ErrorResp), Toast.LENGTH_SHORT).show();
+            }
     }
 
     private void permisos()
@@ -223,5 +259,18 @@ public class ActivityPrincipal extends AppCompatActivity {
                 ex.toString();
             }
         }
+    }
+
+    private void mostrarAlertDialog(String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alerta");
+        builder.setMessage(mensaje);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }

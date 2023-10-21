@@ -5,17 +5,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import hn.uth.pm1e168.Models.Personas;
+import hn.uth.pm1e168.configuracion.SQLiteConexion;
+import hn.uth.pm1e168.configuracion.Transacciones;
 
 public class ActivityCall extends AppCompatActivity {
+
+    SQLiteConexion conexion;
+    Spinner combopersonas;
+    EditText telefono;
+    private Button botonLlamar;
+
+    ArrayList<Personas> listperson;
+
+    ArrayList<String> ArregloPersonas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
+
+        conexion =  new SQLiteConexion(this, Transacciones.namedb, null, 1);
+        telefono = (EditText) findViewById(R.id.cbNumero);
+        botonLlamar = findViewById(R.id.btnShowDialog);
+
+        GetPersons();
 
         Button btnRegresar = findViewById(R.id.btnRegresar);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
@@ -26,44 +52,44 @@ public class ActivityCall extends AppCompatActivity {
             }
         });
 
-        Button btnShowDialog = findViewById(R.id.btnShowDialog);
-        btnShowDialog.setOnClickListener(new View.OnClickListener() {
+        botonLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Crear un AlertDialog.Builder
-                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCall.this);
-                builder.setTitle("Llamada");
-                builder.setMessage("¿Seguro deseas llamar?");
+                // Número de teléfono que deseas llamar
+                String numeroTelefono = "97010355";
 
-                // Agregar botón "Sí"
-                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Número de teléfono al que se realizará la llamada
-                        String numero = "97010355"; // Reemplaza con el número deseado
-
-                        // Crear una intención para la acción de llamada
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + numero));
-
-                        // Iniciar la intención para realizar la llamada
-                        startActivity(intent);
-                        dialog.dismiss(); // Cerrar el diálogo
-                    }
-                });
-
-                // Agregar botón "No"
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Acciones a realizar cuando se hace clic en "No"
-                        dialog.dismiss(); // Cerrar el diálogo
-                    }
-                });
-
-                // Mostrar el diálogo
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                // Crear un intent para realizar una llamada telefónica
+                Intent intentLlamar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + numeroTelefono));
+                startActivity(intentLlamar);
             }
         });
+    }
+    private void GetPersons()
+    {
+        SQLiteDatabase db = conexion.getReadableDatabase();
+        Personas person = null;
+        listperson = new ArrayList<Personas>();
+
+        Cursor cursor = db.rawQuery(Transacciones.SelectTablePersonas,null);
+        while(cursor.moveToNext())
+        {
+            person = new Personas();
+            person.setTelefono(cursor.getInt(0));
+
+            listperson.add(person);
+        }
+
+        cursor.close();
+        FillCombo();
+    }
+
+    private void FillCombo()
+    {
+        ArregloPersonas = new ArrayList<String>();
+
+        for(int i = 0; i < listperson.size(); i++)
+        {
+            //ArregloPersonas.add(listperson.get(i).getTelefono() );
+        }
     }
 }

@@ -9,44 +9,74 @@
 
     <Button
         android:id="@+id/btnatras"
-        android:layout_width="match_parent"
+        android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:text="Atras" />
 
     <ListView
         android:id="@+id/listpersonas"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="321dp"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="70dp" />
 
     <Button
         android:id="@+id/btncompartir"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Compartir Contacto" />
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Eliminar Contacto" />
+        android:orientation="vertical"
+        android:text="Compartir Contacto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toEndOf="@+id/btnDelete"
+        app:layout_constraintTop_toBottomOf="@+id/btnVer"
+        app:layout_constraintVertical_bias="0.184" />
 
     <Button
         android:id="@+id/btnVer"
-        android:layout_width="200dp"
+        android:layout_width="171dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Ver Imagen" />
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:text="Ver Imagen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listpersonas" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:text="Eliminar Contacto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnactualizar"
+        app:layout_constraintVertical_bias="0.198" />
 
     <Button
         android:id="@+id/btnactualizar"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Actualizar Contacto" />
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:text="Actualizar Contacto"
+        app:layout_constraintEnd_toStartOf="@+id/btnVer"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listpersonas" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imagen_predeterminada"
+    />
+
 </LinearLayout>

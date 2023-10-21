@@ -9,4 +9,5 @@
     <string name="btnContactos">Contactos Salvados</string>
     <string name="Respuesta">Registro ingreso con exito</string>
     <string name="ErrorResp">Error no se pudo registrar</string>
+    <string name="txtPa">Pais</string>
 </resources>

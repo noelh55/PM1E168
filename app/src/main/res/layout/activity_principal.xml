@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="162dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -21,24 +21,26 @@
         android:layout_margin="16dp"
         android:layout_marginTop="16dp" />
 
-    <TextView
-        android:id="@+id/txtTexto1"
-        android:layout_width="118dp"
-        android:layout_height="wrap_content"
-        android:text="@string/txtTexto" />
+    <Button
+        android:id="@+id/btnAd"
+        android:layout_width="68dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        app:icon="@android:drawable/ic_input_add" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="241dp"
         android:layout_height="wrap_content"
-        android:layout_margin="18dp" />
+        android:layout_margin="9dp" />
 
     <EditText
         android:id="@+id/txtnombre"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:ems="10"
+        android:layout_margin="9dp"
+        android:ems="9"
         android:hint="@string/txtnombre"
         android:inputType="text" />
 
@@ -46,8 +48,8 @@
         android:id="@+id/txtTelefono"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:ems="10"
+        android:layout_margin="9dp"
+        android:ems="9"
         android:hint="@string/txtTelefono"
         android:inputType="phone" />
 
@@ -55,7 +57,7 @@
         android:id="@+id/txtnota"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
+        android:layout_margin="9dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/txtNota"
@@ -65,16 +67,16 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:layout_marginTop="14dp"
+        android:layout_margin="6dp"
+        android:layout_marginTop="12dp"
         android:text="@string/btnSalvar" />
 
     <Button
         android:id="@+id/btnContactos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:layout_marginTop="14dp"
+        android:layout_margin="9dp"
+        android:layout_marginTop="10dp"
         android:text="@string/btnContactos" />
 
 </LinearLayout>

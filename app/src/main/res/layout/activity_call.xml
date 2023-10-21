@@ -10,25 +10,33 @@
 
     <Button
         android:id="@+id/btnRegresar"
-        android:layout_width="match_parent"
+        android:layout_width="163dp"
         android:layout_height="wrap_content"
         android:onClick="regresar"
         android:text="Atras" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        app:srcCompat="@android:drawable/ic_menu_call" />
+
     <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="wrap_content"
+        android:id="@+id/cbNumero"
+        android:layout_width="316dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        android:text="+504 97010355"
+        android:text="97010355"
+        android:textAlignment="center"
         tools:layout_editor_absoluteX="115dp"
         tools:layout_editor_absoluteY="190dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/btnShowDialog"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:text="Marcar"
-        android:id="@+id/btnShowDialog" />
+        app:icon="@android:drawable/stat_sys_phone_call" />
 
 </LinearLayout>
