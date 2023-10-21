@@ -13,12 +13,14 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +31,10 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import hn.uth.pm1e168.Models.Personas;
 import hn.uth.pm1e168.configuracion.SQLiteConexion;
 import hn.uth.pm1e168.configuracion.Transacciones;
 
@@ -117,7 +121,7 @@ public class ActivityPrincipal extends AppCompatActivity {
                 } else if ( num3EditText.getText().toString().isEmpty()) {
                     mostrarAlertDialog("Campo Nota está vacío");
                 } else {
-                AddPerson();}
+                    AddPerson();}
             }
         });
 
@@ -131,30 +135,30 @@ public class ActivityPrincipal extends AppCompatActivity {
     }
 
     private void AddPerson() {
-            try {
-                SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.namedb, null, 1);
-                SQLiteDatabase db = conexion.getWritableDatabase();
+        try {
+            SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.namedb, null, 1);
+            SQLiteDatabase db = conexion.getWritableDatabase();
 
-                ContentValues valores = new ContentValues();
-                //valores.put(Transacciones.pais, pais.getText().toString());
-                valores.put(Transacciones.nombre, nombre.getText().toString());
-                valores.put(Transacciones.telefono, telefono.getText().toString());
-                valores.put(Transacciones.nota, nota.getText().toString());
+            ContentValues valores = new ContentValues();
+            //valores.put(Transacciones.pais, pais.getText().toString());
+            valores.put(Transacciones.nombre, nombre.getText().toString());
+            valores.put(Transacciones.telefono, telefono.getText().toString());
+            valores.put(Transacciones.nota, nota.getText().toString());
 
-                Long Result = db.insert(Transacciones.Tabla, Transacciones.id, valores);
+            Long Result = db.insert(Transacciones.Tabla, Transacciones.id, valores);
 
-                String resultado = String.valueOf(telefono);
+            String resultado = String.valueOf(telefono);
 
-                // Enviar el resultado a la segunda actividad
-                Intent intent = new Intent(ActivityPrincipal.this, ActivityCall.class);
-                intent.putExtra("resultado", resultado);
-                startActivity(intent);
+            // Enviar el resultado a la segunda actividad
+            Intent intent = new Intent(ActivityPrincipal.this, ActivityCall.class);
+            intent.putExtra("resultado", resultado);
+            startActivity(intent);
 
-                Toast.makeText(this, getString(R.string.Respuesta), Toast.LENGTH_SHORT).show();
-                db.close();
-            } catch (Exception exception) {
-                Toast.makeText(this, getString(R.string.ErrorResp), Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(this, getString(R.string.Respuesta), Toast.LENGTH_SHORT).show();
+            db.close();
+        } catch (Exception exception) {
+            Toast.makeText(this, getString(R.string.ErrorResp), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void permisos()

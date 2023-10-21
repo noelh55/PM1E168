@@ -12,6 +12,7 @@ public class Transacciones {
     // Campos de la tabla
     public static final String id = "id";
     public static final String pais = "pais";
+    public static final String campoTexto = "campoTexto";
     public static final String nombre = "nombre";
     public static final String telefono = "telefono";
     public static final String nota = "nota";
@@ -20,7 +21,7 @@ public class Transacciones {
     // Consultas de Base de datos
     //ddl
     public static final String CreateTablePersonas = "CREATE TABLE personas "+
-            "(nombre TEXT, telefono INTEGER, " + "nota TEXT )";
+            "(nombre TEXT, telefono INTEGER, " + "nota TEXT, campoTexto TEXT )";
 
     public static final String DropTablePersonas  = "DROP TABLE IF EXISTS personas";
 

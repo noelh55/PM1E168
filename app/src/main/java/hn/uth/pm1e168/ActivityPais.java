@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import hn.uth.pm1e168.configuracion.SQLiteConexion;
@@ -19,6 +21,10 @@ public class ActivityPais extends AppCompatActivity {
     private EditText num1EditText;
     private EditText campoTexto;
     private Button botonGuardar;
+    private EditText editText;
+    private Button guardarButton;
+    private Spinner spinner;
+    private ArrayAdapter<String> spinnerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +36,26 @@ public class ActivityPais extends AppCompatActivity {
 
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Obtener el texto del campo de entrada
-                String texto = campoTexto.getText().toString();
-
-                if (texto.isEmpty()) {
-                    // Mostrar un Toast indicando que el campo está vacío
-                    Toast.makeText(ActivityPais.this, "El campo está vacío", Toast.LENGTH_SHORT).show();
-                } else {
-                }
-            }
+            public void onClick(View v) {AddPerson();}
         });
+    }
+
+    private void AddPerson() {
+        try {
+            SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.namedb, null,1);
+            SQLiteDatabase db =  conexion.getWritableDatabase();
+
+            ContentValues valores = new ContentValues();
+            valores.put(Transacciones.campoTexto, campoTexto.getText().toString());
+
+            Long Result = db.insert(Transacciones.Tabla, Transacciones.id, valores);
+
+            Toast.makeText(this, getString(R.string.Respuesta), Toast.LENGTH_SHORT).show();
+            db.close();
+        }
+        catch (Exception exception)
+        {
+            Toast.makeText(this, getString(R.string.ErrorResp), Toast.LENGTH_SHORT).show();
+        }
     }
 }
