@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PM1E168</string>
+    <string name="txtnombre">Nombre</string>
+    <string name="txtTelefono">Telefono</string>
+    <string name="txtTexto">Pais</string>
+    <string name="txtNota">Nota</string>
+    <string name="btntakefoto">Tomar Fotografia</string>
+    <string name="btnSalvar">Salvar Contacto</string>
+    <string name="btnContactos">Contactos Salvados</string>
+    <string name="Respuesta">Registro ingreso con exito</string>
+    <string name="ErrorResp">Error no se pudo registrar</string>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivityPrincipal">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btntakefoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btntakefoto"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/txtTexto1"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txtTexto" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="241dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp" />
+
+    <EditText
+        android:id="@+id/txtnombre"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:ems="10"
+        android:hint="@string/txtnombre"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/txtTelefono"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:ems="10"
+        android:hint="@string/txtTelefono"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/txtnota"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/txtNota"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/btnSalvar" />
+
+    <Button
+        android:id="@+id/btnContactos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/btnContactos" />
+
+</LinearLayout>
